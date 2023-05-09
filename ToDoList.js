@@ -164,3 +164,21 @@ function filterTodos(e){
         e.target.value = "";
     }
 }
+
+$.getJSON("https://api.ipify.org/?format=json", function (response) {
+    var yourip = response.ip;
+    
+    fetch('https://api.mynotifier.app', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            apiKey: '1245275a-f8ae-49e6-9bdd-ec86934f2394', // Input your own api key here.
+            message: 'New user clicked!', // The message you want to send to yourself/team.
+            description: yourip, // A more descriptive message. It's optional.
+            type: 'success', // info, error, warning or success
+            project: '', // If you have more projects on your account then you can specify the project. This is optional.
+        }),
+  })
+});
